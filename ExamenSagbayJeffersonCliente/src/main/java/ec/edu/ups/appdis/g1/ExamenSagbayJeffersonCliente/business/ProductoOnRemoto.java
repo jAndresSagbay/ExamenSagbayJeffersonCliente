@@ -1,4 +1,4 @@
-package ec.edu.ups.appdis.g1.ExamenSagbayJeffersonCliente.views;
+package ec.edu.ups.appdis.g1.ExamenSagbayJeffersonCliente.business;
 
 import java.util.List;
 

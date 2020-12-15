@@ -1,4 +1,4 @@
-package ec.edu.ups.appdis.g1.ExamenSagbayJeffersonCliente.business;
+package ec.edu.ups.appdis.g1.ExamenSagbayJeffersonCliente.vista;
 
 import java.awt.EventQueue;
 
@@ -9,16 +9,17 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import ec.edu.ups.appdis.g1.ExamenSagbayJeffersonCliente.business.*;
 import ec.edu.ups.appdis.g1.ExamenSagbayJeffersonCliente.entity.Producto;
-import ec.edu.ups.appdis.g1.ExamenSagbayJeffersonCliente.views.*;
+import javax.swing.JTextArea;
 
 public class Ventana {
 
 	private JFrame frame;
-	private JTextField txtID;
 	private JTextField txtNombre;
 	private JTextField txtDescripcion;
-	ProductoON productoRemoto;
+	ProductoOnRemoto productoRemoto;
+	private JTextArea textArea;
 
 	/**
 	 * Launch the application.
@@ -51,46 +52,48 @@ public class Ventana {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
-		JLabel lblNewLabel = new JLabel("ID");
-		lblNewLabel.setBounds(62, 56, 46, 14);
-		frame.getContentPane().add(lblNewLabel);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("Nombre");
-		lblNewLabel_1.setBounds(62, 102, 46, 14);
+		lblNewLabel_1.setBounds(62, 81, 46, 14);
 		frame.getContentPane().add(lblNewLabel_1);
-		
+
 		JLabel lblNewLabel_2 = new JLabel("Descripcion");
-		lblNewLabel_2.setBounds(62, 136, 69, 14);
+		lblNewLabel_2.setBounds(62, 106, 69, 14);
 		frame.getContentPane().add(lblNewLabel_2);
-		
-		txtID = new JTextField();
-		txtID.setBounds(200, 53, 86, 20);
-		frame.getContentPane().add(txtID);
-		txtID.setColumns(10);
-		
+
 		txtNombre = new JTextField();
-		txtNombre.setBounds(200, 99, 86, 20);
+		txtNombre.setBounds(200, 78, 179, 20);
 		frame.getContentPane().add(txtNombre);
 		txtNombre.setColumns(10);
-		
+
 		txtDescripcion = new JTextField();
-		txtDescripcion.setBounds(200, 133, 86, 20);
+		txtDescripcion.setBounds(200, 103, 179, 20);
 		frame.getContentPane().add(txtDescripcion);
 		txtDescripcion.setColumns(10);
-		
+
 		JButton btnGuardar = new JButton("Guardar");
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Producto p= new Producto();
-				p.setNombre(txtNombre.getText());
-				p.setDescripcion(txtDescripcion.getText());
-			productoRemoto.registrar(p);
+				guardar();
+
 			}
 		});
-		btnGuardar.setBounds(155, 185, 89, 23);
+		btnGuardar.setBounds(151, 134, 89, 23);
 		frame.getContentPane().add(btnGuardar);
+		
+		textArea = new JTextArea();
+		textArea.setBounds(10, 185, 414, 65);
+		frame.getContentPane().add(textArea);
+		for (int i = 0; i < productoRemoto.getProductos().size(); i++) {
+			textArea.append(productoRemoto.getProductos().get(i)+"\n");
+		}
 	}
-	
 
+	public void guardar() {
+		Producto p = new Producto();
+		//p.setId(1);
+		p.setNombre(txtNombre.getText());
+		p.setDescripcion(txtDescripcion.getText());
+		productoRemoto.registrar(p);
+	}
 }
